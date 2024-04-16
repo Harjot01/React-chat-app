@@ -30,15 +30,16 @@ const Login = () => {
 
     const { username, email, password } = Object.fromEntries(formData)
 
+
     try {
       const res = await createUserWithEmailAndPassword(auth, email, password);
 
-      const imgUrl = await upload(avatar.file)
+      // const imgUrl = await upload(avatar.file)
 
       await setDoc(doc(db, "users", res.user.uid), {
         username,
         email,
-        avatar: imgUrl,
+        // avatar: imgUrl,
         id: res.user.uid,
         blocked: [],
       })
@@ -46,9 +47,7 @@ const Login = () => {
       await setDoc(doc(db, "userchats", res.user.uid), {
         chats: [],
       })
-
-
-
+      
       toast.success("Account created! You can login now!")
 
 
